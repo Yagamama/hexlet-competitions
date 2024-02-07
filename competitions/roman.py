@@ -26,6 +26,7 @@ def to_roman(num):
 def to_arabic(arab):
     arabian = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     str = re.findall('M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})', arab)
+    str = re.findall('C', arab)
     print (str)
     order = {'V': 'I', 
              'X': 'I', 
