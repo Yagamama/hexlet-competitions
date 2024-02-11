@@ -23,6 +23,7 @@ def non_interactive(**kwargs):
                 input_function=lambda key, _: kwargs[key],
                 output_function=output.append,
             )(function)()
+            print('kwargs test =', kwargs)
             return output[1]  # нужен только "выведенный" результат
         return inner
     return wrapper
@@ -55,11 +56,11 @@ def test_non_interactive():
 
 
 def test_asks():
-    @non_interactive(x='42', y='57')
     @asks('x', 'Enter first number: ')
     @asks('y', 'Enter second number: ')
+    @non_interactive(x='42', y='57')
     def add(x, y):
-        return int(x) + int(y)
+        print(int(x) + int(y))
 
     assert add() == 99
 
@@ -75,7 +76,11 @@ def test_asks_order():
     @asks('a', '?')
     @asks('b', '??')
     def two_args(a, b):
-        return a + b
+        print(a + b)
 
     two_args()
     assert order == ['a', 'b'], "Questions should be asked in ceratin order!"
+
+
+if __name__ == '__main__':
+    test_asks()

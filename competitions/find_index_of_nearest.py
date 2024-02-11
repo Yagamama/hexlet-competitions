@@ -1,18 +1,14 @@
 from functools import reduce
-import operator
 
 
 def find_index_of_nearest(number, array):
     if array == []:
         print('None')
         return None
-    result = array.sort(key=lambda x: abs(number - x))
-    #result = map(lambda x: abs(number - x), array)
-    #print(str(list(result)))
-    #array.sort(key=result)
-    print(result)
-    print(array)
-    return array
+    result = list(map(lambda x: abs(number - x), array))
+    min = (reduce(lambda x,y: x if x<y else y, result))
+    print(result.index(min))
+    return result.index(min)
 
 
 if __name__ == "__main__":

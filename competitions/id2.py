@@ -1,4 +1,4 @@
-def simple_input(_, prompt):
+def simple_input(_, prompt, name = {}, text = {}, value = {}):
     """Just input string."""
     return input(prompt)
 
@@ -20,13 +20,16 @@ def asks(name, prompt):
     """
     # BEGIN (write your solution here)
     def wrapper(func):
-
+        
         def inner(*args, **kwargs):
-            # arg = simple_input(name, prompt)
-            # print('name =', arg)
-            return func(name, prompt)
-            # return func(*args, **kwargs)
-        return inner
+            kwargs.update({name:prompt})
+            # kwargs[name] = prompt
+            print('kwargs =', kwargs)
+            #simple_input.__setattr__(kwargs.update({name:prompt}))
+            simple_input.__setattr__('prompt', prompt)
+            print('asks s_i attr: ',simple_input.__getattribute__('prompt'))
+            return kwargs
+        return inner()
     return wrapper
     # END
 
@@ -60,8 +63,13 @@ def interactive(
     def wrapper(func):
         def inner(*args, **kwargs):
             output_function(description)
-            arg = asks()(input_function)(*args, **kwargs)
-            result = func(arg, *args, **kwargs)
+            #kwargs = getattr(input_function, **kwargs)
+            print('kwargs inter =', kwargs)
+            for key, prompt in kwargs:
+                value = input_function(key, prompt)
+                kwargs[key] = value
+            print('kwargs inter2 =', kwargs)
+            result = func(*kwargs.values())
             output_function(result)
         return inner
     return wrapper
