@@ -20,15 +20,18 @@ def asks(name, prompt):
     """
     # BEGIN (write your solution here)
     def wrapper(func):
-        
+        array = {}
         def inner(*args, **kwargs):
             kwargs.update({name:prompt})
-            # kwargs[name] = prompt
-            print('kwargs =', kwargs)
+            #print('kwargs =', kwargs)
             #simple_input.__setattr__(kwargs.update({name:prompt}))
-            simple_input.__setattr__('prompt', prompt)
-            print('asks s_i attr: ',simple_input.__getattribute__('prompt'))
-            return kwargs
+            #simple_input.__setattr__('prompt', prompt)
+            simple_input.__setattr__ = {'name': prompt}
+            array[name] = prompt
+            print('array =', array)
+            #print('asks s_i attr: ',simple_input.__getattribute__(name))
+            #interactive.__kwdefaults__ = {name: prompt}
+            return array
         return inner()
     return wrapper
     # END
@@ -38,6 +41,7 @@ def interactive(
     description,
     input_function=simple_input,
     output_function=print,
+    **kw,
 ):
     """
     Делает функцию с описанными параметрами интерактивной.
@@ -63,8 +67,9 @@ def interactive(
     def wrapper(func):
         def inner(*args, **kwargs):
             output_function(description)
-            #kwargs = getattr(input_function, **kwargs)
-            print('kwargs inter =', kwargs)
+            kw = getattr(asks, 'array')
+            # kw = getattr(simple_input, 'name')
+            print('kwargs inter =', kw)
             for key, prompt in kwargs:
                 value = input_function(key, prompt)
                 kwargs[key] = value
