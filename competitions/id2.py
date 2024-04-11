@@ -1,9 +1,9 @@
-def simple_input(_, prompt, name = {}, text = {}, value = {}):
+def simple_input(_, prompt):
     """Just input string."""
     return input(prompt)
 
 
-def asks(name, prompt):
+def asks(name, prompt, **kw):
     """
     Описывает один запрос аргумента.
 
@@ -19,20 +19,18 @@ def asks(name, prompt):
 
     """
     # BEGIN (write your solution here)
+
     def wrapper(func):
-        array = {}
+
         def inner(*args, **kwargs):
-            kwargs.update({name:prompt})
-            #print('kwargs =', kwargs)
-            #simple_input.__setattr__(kwargs.update({name:prompt}))
-            #simple_input.__setattr__('prompt', prompt)
-            simple_input.__setattr__ = {'name': prompt}
-            array[name] = prompt
-            print('array =', array)
-            #print('asks s_i attr: ',simple_input.__getattribute__(name))
-            #interactive.__kwdefaults__ = {name: prompt}
-            return array
-        return inner()
+            #f = simple_input
+            kw[name] = prompt
+            print ('asks kw =', kw)
+            #print (simple_input.__getattribute__())
+            interactive.__setattr__('input_function', simple_input(name, prompt))
+            # return #(func(*args, **kwargs))
+            return #(*args, kw)
+        return inner
     return wrapper
     # END
 
@@ -41,7 +39,6 @@ def interactive(
     description,
     input_function=simple_input,
     output_function=print,
-    **kw,
 ):
     """
     Делает функцию с описанными параметрами интерактивной.
@@ -67,21 +64,20 @@ def interactive(
     def wrapper(func):
         def inner(*args, **kwargs):
             output_function(description)
-            kw = getattr(asks, 'array')
-            # kw = getattr(simple_input, 'name')
-            print('kwargs inter =', kw)
-            for key, prompt in kwargs:
+            #kw = getattr(input_function, **kwargs)
+            print('kw = ', kwargs)
+            for key, prompt in kwargs.items():
                 value = input_function(key, prompt)
+                print('value = ', value)
                 kwargs[key] = value
-            print('kwargs inter2 =', kwargs)
-            result = func(*kwargs.values())
+            result = func(*kwargs)
             output_function(result)
         return inner
     return wrapper
     # END
 
 
-@interactive('Calculator')
+@interactive('Calculator')  
 @asks('x', 'Enter first number: ')
 @asks('y', 'Enter second number: ')
 def calc(x, y):
