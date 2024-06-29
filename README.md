@@ -1,1 +1,4 @@
-hexlet-competitions
+Задания с ru.hexlet.io, профессия Python-разработчик.
+Директория exercises - текущие упражнения к урокам, competitions - задания в конце курсов повышенной сложности. Каждый файл - отдельное задание. 
+
+Профиль на hexlet - https://ru.hexlet.io/u/mindzu 
