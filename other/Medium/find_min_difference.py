@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/minimum-time-difference/description/
+
 # Given a list of 24-hour clock time points in "HH:MM" format, 
 # return the minimum minutes difference between any two time-points in the list.
  
@@ -23,11 +25,13 @@ def findMinDifference(timePoints):
     timeMins = sorted([to_minutes(x) for x in timePoints])
     diff = [timeMins[i+1] - timeMins[i] for i in range(len(timeMins)-1)]
     diff.append(1440 - timeMins[len(timeMins)-1] + timeMins[0])
-    # print(timeMins)
-    # print(diff)
     return min(diff)
 
 
 if __name__ == '__main__':
+    t = ["23:59","00:00"]
+    print(findMinDifference(t))  # 1
     t = ["23:59","00:00", "11:13"]
-    print(findMinDifference(t))
+    print(findMinDifference(t))  # 1 
+    t = ["00:00","23:59","00:00"]
+    print(findMinDifference(t))  # 0

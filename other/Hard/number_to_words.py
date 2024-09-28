@@ -2,8 +2,6 @@
 
 # Convert a non-negative integer num to its English words representation.
 
- 
-
 # Example 1:
 
 # Input: num = 123
