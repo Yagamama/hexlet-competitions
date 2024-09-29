@@ -12,11 +12,11 @@
 
 # string convert(string s, int numRows);
  
-
 # Example 1:
 
 # Input: s = "PAYPALISHIRING", numRows = 3
 # Output: "PAHNAPLSIIGYIR"
+
 # Example 2:
 
 # Input: s = "PAYPALISHIRING", numRows = 4
@@ -26,6 +26,7 @@
 # A   L S  I G
 # Y A   H R
 # P     I
+
 # Example 3:
 
 # Input: s = "A", numRows = 1
@@ -49,8 +50,6 @@ def convert(s: str, numRows: int) -> str:
             i -= 1
             if i == 0:
                 go_down = True
-    # for item in rows:
-    #     print(''.join(item))
     return ''.join([''.join(item) for item in rows])
 
 if __name__ == '__main__':
