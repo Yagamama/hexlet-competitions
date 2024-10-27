@@ -24,17 +24,8 @@
 # Square "a1" is black and "h3" is white.
 
 def checkTwoChessboards(coordinate1, coordinate2):
-    nums = {'a': 1,
-            'b': 2,
-            'c': 3,
-            'd': 4,
-            'e': 5,
-            'f': 6,
-            'g': 7,
-            'h': 8,
-            }
-    first = nums[coordinate1[0]] + int(coordinate1[1])
-    second = nums[coordinate2[0]] + int(coordinate2[1])
+    first = ord(coordinate1[0]) + int(coordinate1[1])
+    second = ord(coordinate2[0]) + int(coordinate2[1])
     return first % 2 == second % 2
 
 
