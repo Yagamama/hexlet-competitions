@@ -34,10 +34,8 @@ def fib(n):
         return n
     prev = 0
     cur = 1
-    i = 1 
-    while i < n:
+    for _ in range(1, n):
         prev, cur = cur, prev + cur
-        i += 1
     return cur
 
 
