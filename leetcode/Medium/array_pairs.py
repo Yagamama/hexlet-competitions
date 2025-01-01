@@ -30,14 +30,15 @@ def canArrange(arr, k):
     arr2 = sorted([x % k for x in arr if x % k > 0])
     if len(arr2) % 2 != 0:
         return False
-    while len(arr2) > 0:
-        if (arr2[0] + arr2[len(arr2)-1]) % k == 0:
-            arr2.pop(len(arr2)-1)
-            arr2.pop(0)
+    left = 0
+    right = len(arr2) - 1
+    while left < right:
+        if (arr2[left] + arr2[right]) % k == 0:
+            left += 1
+            right -= 1
         else:
             return False
     return True
-
 
 
 if __name__ == '__main__':
