@@ -39,7 +39,6 @@ def minOperations(nums):
             nums[i+1] = 1 - nums[i+1]
             nums[i+2] = 1 - nums[i+2]
             count += 1
-        print(nums)
     if nums[-1] == nums[-2] == nums[-3]:
         if nums[-1] == 0:
             return count + 1
