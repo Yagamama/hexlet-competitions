@@ -22,7 +22,6 @@
 # 1 <= dominoes[i][j] <= 9
 
 def numEquivDominoPairs(dominoes):
-    result = 0
     dom = {}
     for d in dominoes:
         a, b = min(d[0], d[1]), max(d[0], d[1])
